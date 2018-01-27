@@ -1,0 +1,15 @@
+{% load i18n %}
+{% if field not in form.hidden_fields %}
+<div class="field {% if field.errors %} has-error{% endif %}{% if field.field.required %} field-required{% endif %}">
+    <label class="label">{{ field.label }}</label>
+    <div class="control">
+        {{ field }}
+    </div>
+    {% if field.help_text %}
+        <div class="help">{{ field.help_text|safe }}</div>
+    {% endif %}
+    {% if field.errors %}
+          <div class="help is-danger">{{ field.errors }}</div>
+    {% endif %}
+</div>
+{% endif %}

@@ -1,0 +1,12 @@
+{% load i18n %}
+<div class="file has-name is-fullwidth">
+    <label class="file-label">
+        <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %} />
+        <span class="file-cta"><span class="file-icon"><i class="fas fa-upload"></i></span>
+        <span class="file-label">{%  trans "Choose a file…" %}</span>
+    </span>
+    <span class="file-name">
+        {% if widget.is_initial %}<a href="{{ widget.value.url }}">{{ widget.value }}</a>{% endif %}
+    </span>
+  </label>
+</div>

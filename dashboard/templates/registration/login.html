@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Login" %}{% endblock %}
+
+{% block content %}
+    <h2 class="title">{% trans "Login" %}</h2>
+    <form method="post">{% csrf_token %}
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% for field in form.visible_fields %}
+            {% include "documents/includes/field.html" with field=field %}
+        {% endfor %}
+        <button type="submit" class="button is-primary">
+            <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+            <span>{% trans "Sign in" %}</span>
+        </button>
+    </form>
+{% endblock content %}

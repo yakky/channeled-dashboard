@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block script %}
+    var users_count_path = '/status/users/';
+    var current_user = '{{ request.user.pk }}';
+    var media_base_url = '/media/';
+    var document_base_url = '{% url "documents-list" %}';
+    {% block channel-paths %}
+    {% endblock channel-paths %}
+{% endblock script %}
+{% block title-tag %}{% trans "Documents" %}{% endblock title-tag %}
+
+{% block notification %}
+<div class="notification">
+    <button class="delete"></button>
+    <h3 class="notification__title"></h3>
+    <div class="notification__message"></div>
+</div>
+{% endblock notification %}

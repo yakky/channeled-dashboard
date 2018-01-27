@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+isort = "*"
+"flake8" = "*"
+
+[packages]
+django = "~=1.11.0"
+channels = "<2.0"
+django-model-utils = "*"
+django-meta = "*"
+django-ckeditor = "*"
+django-compressor = "*"
+asgi-redis = "*"
+pillow = "*"
+
+[requires]
+python_version = "3.6"

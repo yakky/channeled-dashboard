@@ -1,0 +1,67 @@
+{% load staticfiles compress meta i18n %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head {% meta_namespaces %}>
+    {% block head %}
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <title>{% block title-tag %}{% block title %}{% endblock title %}{% block title-prefix %} - {{ SITE.name }}{% endblock title-prefix %}{% endblock title-tag %}</title>
+        {% block favicon %}<link rel="icon" href="{% static 'img/favicon.ico' %}"/>{% endblock favicon %}
+        {% autoescape off %}
+        {% if meta %}
+            {% include "meta/meta.html" %}
+        {% else %}
+            {% if meta.description %}{% meta 'description' meta.description %}{% endif %}
+            {% if meta.keywords %}{% meta_list 'keywords' meta.keywords|join:"," %}{% endif %}
+        {% endif %}
+        {% endautoescape %}
+        {% if not SITE_ACTIVE %}
+            <meta name="robots" content="noindex, nofollow, noarchive">
+        {% endif %}
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% endblock head %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
+        {% block css %}{% endblock css %}
+        <style media="all">
+            {% block css-inline %}
+            {% endblock css-inline %}
+        </style>
+    {% endcompress css %}
+    {% block head-extra %}{% endblock head-extra %}
+</head>
+<body {% block body-opts %}{% endblock body-opts %}>
+{% block body %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <h1 class="title column is-one-column"><a href="/">{% trans "Dashboard" %}</a></h1>
+            <h2 class="title column is-one-column">{% trans "Hi" %} {{ request.user.get_full_name }}</h2>
+            {% if request.user.is_authenticated %}
+            <div class="users-counter button is-outlined is-primary">
+                <span class="icon"><i class="fas fa-users"></i></span>
+                <span id="users-counter"></span>
+            </div>
+            {% endif %}
+        </div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</section>
+{% endblock body %}
+
+<script defer src="//use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+{% compress js %}
+<script defer src="{% static "channels/js/websocketbridge.js" %}"></script>
+<script defer src="{% static "js/functions.js" %}"></script>
+<script defer src="{% static "js/dashboard.js" %}"></script>
+<script defer type="text/javascript">
+    {% block script %}
+    {% endblock script %}
+    document.addEventListener("DOMContentLoaded", function(event) {
+        {% block script-ready %}
+        {% endblock script-ready %}
+    });
+</script>
+{% endcompress %}
+</body>
+</html>

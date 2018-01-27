@@ -1,0 +1,20 @@
+{% extends "documents/base.html" %}
+{% load i18n %}
+
+{% block channel-paths %}
+    var notifications_path = '/status/notifications/';
+    var document_path = '/status/document/{{ document.slug }}/{{ document.Status.read }}/';
+    var document_group = '{{ document.slug }}-{{ document.Status.read }}';
+{% endblock channel-paths %}
+
+{% block title-tag %}{% trans "Documents" %}: {{ document.title }}{% endblock title-tag %}
+
+{% block head-extra %}
+    {{ form.media }}
+{% endblock head-extra %}
+
+{% block content %}
+<div class="columns">
+    {% include "documents/includes/document_list_item.html" with detail=True %}
+</div>
+{% endblock content %}

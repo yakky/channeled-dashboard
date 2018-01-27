@@ -1,0 +1,37 @@
+stages:
+  - lint
+  - test
+
+cache:
+  untracked: true
+  paths:
+    - .tox/
+    - node_modules/
+
+before_script:
+  -   pip install --user tox
+
+flake8:
+  stage: lint
+  script:
+    - tox -eflake8
+
+isort:
+  stage: lint
+  script:
+    - tox -eisort
+
+npm-test:
+  stage: test
+  script:
+    - npm install
+    - npm run deploy
+  except:
+    - tags
+
+test:
+  stage: test
+  script:
+    - tox -epy36
+  except:
+    - tags

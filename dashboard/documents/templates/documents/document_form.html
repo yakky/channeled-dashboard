@@ -1,0 +1,34 @@
+{% extends "documents/base.html" %}
+{% load i18n %}
+
+{% block channel-paths %}
+    var notifications_path = '';
+    var document_path = '/status/document/{{ document.slug }}/{{ document.Status.update }}/';
+    var document_group = '{{ document.slug }}-{{ document.Status.update }}';
+{% endblock channel-paths %}
+
+{% block title-tag %}{% trans "Documents" %}: {{ document.title }}{% endblock title-tag %}
+
+{% block head-extra %}
+    {{ form.media }}
+{% endblock head-extra %}
+
+{% block content %}
+<div class="card">
+    <a id="{{ document.slug }}-status" class="document-status button is-success is-small is-pulled-right">{% trans "Free" %}</a>
+    <form class="document-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% for field in form.visible_fields %}
+            {% include "documents/includes/field.html" with field=field %}
+        {% endfor %}
+        <button type="submit" class="button is-primary">
+            <span class="icon"><i class="fas fa-save"></i></span>
+            <span>{% trans "Save" %}</span>
+        </button>
+        <a href="{% url 'documents-list' %}" class="button is-info">
+            <span class="icon"><i class="fas fa-arrow-left"></i></span>
+            <span>{% trans "Back" %}</span>
+        </a>
+    </form>
+</div>
+{% endblock content %}

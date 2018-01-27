@@ -1,0 +1,54 @@
+{% load i18n %}
+<div class="column {{ size }}">
+    <div class="card">
+        <header class="card-header">
+            <h2 class="card-header-title">{{ document.title }}</h2>
+            <a id="{{ document.slug }}-status" class="document-status button is-success is-small is-pulled-right">{% trans "Free" %}</a>
+        </header>
+        {% if not detail %}
+            <div class="card-image">
+                <figure class="image"><img src="{{ document.image.url }}" alt="{{ document.title }}"></figure>
+            </div>
+        {% endif %}
+        <div class="card-content">
+            {% if detail %}
+                <div class="media">
+                    <div class="media-left">
+                        <figure class="image">
+                            <img src="{{ document.image.url }}" alt="{{ document.title }}">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <p class="subtitle">{{ document.abstract|safe }}</p>
+                        <h3>{% trans "by" %} {{ document.author.get_full_name }}</h3>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="content">
+                {% if detail %}
+                    {{ document.text|safe }}
+                {% else %}
+                    {{ document.abstract|safe }}
+                    <p>{% trans "by" %} {{ document.author.get_full_name }}</p>
+                {% endif %}
+                {% trans "Last modified" %}: <time datetime="{{ document.modified|date:'Y-m-d H:i:s' }}">{{ document.modified|date:'H:i:s d M Y' }}</time>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <a href="{% url "document-detail" document.slug %}" class="card-footer-item button is-success">
+                <span class="icon"><i class="fas fa-book"></i></span>
+                <span>{% trans "Read" %}</span>
+            </a>
+            <a href="{% url "document-update" document.slug %}" class="card-footer-item button is-warning">
+                <span class="icon"><i class="fas fa-pencil-alt"></i></span>
+                <span>{% trans "Edit" %}</span>
+            </a>
+            {% if detail %}
+            <a href="{% url "documents-list" %}" class="card-footer-item button is-info">
+                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                <span>{% trans "Back" %}</span>
+            </a>
+            {% endif %}
+        </footer>
+    </div>
+</div>
