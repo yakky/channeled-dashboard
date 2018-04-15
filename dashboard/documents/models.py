@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
@@ -24,7 +26,7 @@ class Document(TimeStampedModel):
     image = ImageField(_('image'), null=True)
     abstract = RichTextField(_('abstract'), null=True)
     text = RichTextField(_('content'), null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('author'), null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('author'), null=True, on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = _('document')
@@ -38,6 +40,15 @@ class Document(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        # here the model send a message to all the consumers on the group
+        # named after its slug when the model instance is saved
+        # we are effectively pushing a message from outside channels into
+        # the channels infrastructure
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(self.slug, {
+            'type': 'document.saved',
+            'message': 'document saved'
+        })
         return super(Document, self).save(*args, **kwargs)
 
     @staticmethod

@@ -3,6 +3,10 @@
 
 {% block title %}{% trans "Login" %}{% endblock %}
 
+{% block channel-paths %}
+    var notifications_path = '';
+{% endblock channel-paths %}
+
 {% block content %}
     <h2 class="title">{% trans "Login" %}</h2>
     <form method="post">{% csrf_token %}
