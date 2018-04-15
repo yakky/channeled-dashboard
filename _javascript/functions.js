@@ -1,5 +1,6 @@
-/*global document_base_url, media_base_url */
-'use strict';
+/* global document_base_url, media_base_url, current_user */
+/* exported addNotification, update_document_list */
+
 
 // Add new notifications
 function addNotification(title, obj) {
@@ -9,7 +10,7 @@ function addNotification(title, obj) {
       body: obj.title,
       icon: `${media_base_url}${obj.image}`,
       url: `${obj.slug}/`,
-      tag: obj.slug
+      tag: obj.slug,
     };
     const note = new Notification(title, data);
     // on click the user is directred to the obj detail page
@@ -21,7 +22,8 @@ function addNotification(title, obj) {
 }
 
 function update_document_detail(data) {
-  let read = [], update = [];
+  let read = [];
+  let update = [];
   const statusElement = document.getElementById(`${data.document}-status`);
   if (statusElement) {
     if (data.read) {
@@ -35,13 +37,11 @@ function update_document_detail(data) {
       statusElement.textContent = 'write';
       statusElement.classList.add('is-danger');
       statusElement.title = update.map(item => item[1]).join(', ');
-    }
-    else if (read.length > 0) {
+    } else if (read.length > 0) {
       statusElement.textContent = 'read';
       statusElement.classList.add('is-warning');
       statusElement.title = read.map(item => item[1]).join(', ');
-    }
-    else if (statusElement) {
+    } else if (statusElement) {
       statusElement.textContent = 'free';
       statusElement.classList.add('is-success');
     }
@@ -50,7 +50,7 @@ function update_document_detail(data) {
 
 
 function update_document_list(data) {
-  Object.values(data).forEach(function (item) {
+  Object.values(data).forEach((item) => {
     update_document_detail(item);
   });
 }

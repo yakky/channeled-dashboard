@@ -1,8 +1,9 @@
-/*global document_base_url, media_base_url */
 'use strict';
 
-// Add new notifications
+/* global document_base_url, media_base_url, current_user */
+/* exported addNotification, update_document_list */
 
+// Add new notifications
 function addNotification(title, obj) {
   // we can show the notification
   if (window.Notification && Notification.permission === 'granted') {
@@ -22,8 +23,8 @@ function addNotification(title, obj) {
 }
 
 function update_document_detail(data) {
-  var read = [],
-      update = [];
+  var read = [];
+  var update = [];
   var statusElement = document.getElementById(data.document + '-status');
   if (statusElement) {
     if (data.read) {

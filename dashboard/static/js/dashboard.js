@@ -1,5 +1,8 @@
-/*global channels, users_count_path, document_path, current_user, notifications_path, addNotification, update_document_detail, update_document_list */
 'use strict';
+
+/* global channels, users_count_path, document_path,
+notifications_path, addNotification, update_document_detail,
+update_document_list */
 
 window.addEventListener('load', function () {
   Notification.requestPermission(function (status) {
@@ -14,7 +17,7 @@ if (notifications_path) {
   var notifications = new channels.WebSocketBridge();
   notifications.connect(notifications_path);
   // Demultiplexing frontend-side
-  notifications.demultiplex('document', function (action, stream) {
+  notifications.demultiplex('document', function (action) {
     var title = void 0;
     // action is used to provide a title to the notification
     if (action.action === 'update') {
@@ -27,7 +30,9 @@ if (notifications_path) {
     // helper function to construct the notification from the object serialization
     addNotification(title, action.data);
   });
-  notifications.listen(function (data) {});
+  notifications.listen(function (data) {
+    console.log(data);
+  });
 }
 
 if (users_count_path) {
