@@ -4,6 +4,12 @@ Channeled Dashboard
 
 Proof-of-concept dashboard with realtime notifications
 
+Branches
+========
+
+* ``channels1``: Channels 1 version [`slides`_]
+* ``channels2``: Channels 2 version (Still WiP)
+
 
 Setup
 =====
@@ -40,3 +46,4 @@ Setup
 
 
 .. _pipenv is installed: https://docs.pipenv.org/install/
+.. _slides: https://speakerdeck.com/yakky/building-real-time-applications-with-django
