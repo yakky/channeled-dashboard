@@ -1,3 +1,10 @@
+# Requirements file (channel2 version)
+# Usage:
+# $ pip install -r requirements.txt
+#
+# NOTE: THIS FILE IS REDUNTANT WITH Pipfile
+# IGNORE IT IF USING pipenv
+
 django==2.0.4
 channels==2.1.1
 django-model-utils==3.1.1
