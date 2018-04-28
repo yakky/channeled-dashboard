@@ -7,8 +7,8 @@ Proof-of-concept dashboard with realtime notifications
 Branches
 ========
 
-* ``channels1``: Channels 1 version [`slides`_]
-* ``channels2``: Channels 2 version (Still WiP)
+* ``channels1``: `Channels 1 version`_
+* ``channels2``: `Channels 2 version`_
 
 
 Setup
@@ -46,4 +46,5 @@ Setup
 
 
 .. _pipenv is installed: https://docs.pipenv.org/install/
-.. _slides: https://speakerdeck.com/yakky/building-real-time-applications-with-django
+.. _Channels 1 version: https://speakerdeck.com/yakky/building-real-time-applications-with-django
+.. _Channels 2 version: https://speakerdeck.com/yakky/building-real-time-applications-with-django-and-channels-2
