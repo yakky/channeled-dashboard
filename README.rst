@@ -8,7 +8,7 @@ Branches
 ========
 
 * ``channels1``: Channels 1 version [`slides`_]
-* ``channels2``: Channels 2 version (Still WiP)
+* ``channels2``: Channels 2 version [`slides_2`_]
 
 
 Setup
@@ -47,3 +47,4 @@ Setup
 
 .. _pipenv is installed: https://docs.pipenv.org/install/
 .. _slides: https://speakerdeck.com/yakky/building-real-time-applications-with-django
+.. _slides_2: https://speakerdeck.com/yakky/building-real-time-applications-with-django-and-channels-2
