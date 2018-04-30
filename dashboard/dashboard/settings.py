@@ -122,8 +122,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
-#ASGI_APPLICATION = 'dashboard.routing.application'
-WSGI_APPLICATION = 'dashboard.wsgi.application'
+ASGI_APPLICATION = 'dashboard.routing.application'
 
 CHANNEL_LAYERS = {
     'default': {
