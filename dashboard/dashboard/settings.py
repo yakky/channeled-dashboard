@@ -122,13 +122,15 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
-print(MEDIA_ROOT)
+#print(MEDIA_ROOT)
 ASGI_APPLICATION = 'dashboard.routing.application'
+CHANNEL_PREFIX = "asgi:"
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': [('localhost', 6379)],
+            'prefix': CHANNEL_PREFIX,
         },
     },
 }
