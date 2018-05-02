@@ -1,0 +1,14 @@
+# Usage:
+# $ pip install -r requirements.txt
+#
+# NOTE: THIS FILE IS REDUNTANT WITH Pipfile
+# IGNORE IT IF USING pipenv
+
+django==1.11.12
+channels==1.1.8
+django-model-utils==3.1.1
+django-meta==1.4.1
+django-ckeditor==5.4.0
+django-compressor==2.2
+asgi-redis==1.4.3
+pillow==5.1.0
