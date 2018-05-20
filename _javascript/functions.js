@@ -1,23 +1,23 @@
-/* global document_base_url, media_base_url, current_user */
+/* global document_base_url, current_user */
 /* exported addNotification, update_document_list */
 
 
 // Add new notifications
-function addNotification(title, obj) {
+function addNotification(notification) {
   // we can show the notification
   if (window.Notification && Notification.permission === 'granted') {
     const data = {
-      body: obj.title,
-      icon: `${media_base_url}${obj.image}`,
-      url: `${obj.slug}/`,
-      tag: obj.slug,
+      body: notification.message,
+      icon: notification.icon,
+      tag: `'notifications_${notification.language}`,
+      url: notification.url,
     };
-    const note = new Notification(title, data);
+    const note = new Notification(notification.title, data);
     // on click the user is directred to the obj detail page
-    note.onclick = function (event) {
+    note.onclick((event) => {
       event.preventDefault();
-      window.document.location = `${document_base_url}${obj.slug}/`;
-    };
+      window.document.location = `${document_base_url}${notification.slug}/`;
+    });
   }
 }
 

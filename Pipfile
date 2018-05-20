@@ -13,6 +13,7 @@ channels = ">=2.1,<2.2"
 django-model-utils = "*"
 django-meta = "*"
 django-ckeditor = "*"
+django-knocker = {file = "https://github.com/nephila/django-knocker/archive/feature/channels-2.zip"}
 django-compressor = "*"
 pillow = "*"
 channels-redis = "*"

@@ -16,22 +16,9 @@ if (notifications_path) {
   // Library is instantiated and connected to the endpoint
   var notifications = new channels.WebSocketBridge();
   notifications.connect(notifications_path);
-  // Demultiplexing frontend-side
-  notifications.demultiplex('document', function (action) {
-    var title = void 0;
-    // action is used to provide a title to the notification
-    if (action.action === 'update') {
-      title = 'Document updated';
-    } else if (action.action === 'create') {
-      title = 'Document created';
-    } else if (action.action === 'delete') {
-      title = 'Document deleted';
-    }
-    // helper function to construct the notification from the object serialization
-    addNotification(title, action.data);
-  });
   notifications.listen(function (data) {
-    console.log(data);
+    // helper function to construct the notification from the object serialization
+    addNotification(JSON.parse(data));
   });
 }
 

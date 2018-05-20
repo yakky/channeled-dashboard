@@ -228,13 +228,3 @@ class DocumentDetailConsumer(DocumentListConsumer):
         self.notify_current_document()
         self.notify_documents()
         super(DocumentDetailConsumer, self).disconnect(code)
-
-    def document_saved(self, event):
-        """
-        This is just a dummy method to handle the document.saved event
-
-        We may want to send browser notifications here whenever a document is saved
-
-        :param event: event object
-        """
-        print(event)

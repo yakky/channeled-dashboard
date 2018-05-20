@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block channel-paths %}
-    var notifications_path = '';
+    var notifications_path = '/knocker/notification/en/';
     var document_path = '/status/document/{{ document.slug }}/{{ document.Status.update }}/';
     var document_group = '{{ document.slug }}-{{ document.Status.update }}';
 {% endblock channel-paths %}
